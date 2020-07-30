@@ -39,9 +39,9 @@ if (!function_exists('str_starts_with')) {
  * @param $endsWith
  * @return bool
  */
-if (!function_exists('str_ends_with')) {
-	function str_ends_with($string, $endsWith)
-	{
-		return strlen($endsWith) == 0 || substr($string, -strlen($endsWith)) === $endsWith;
-	}
-}
+// if (!function_exists('str_ends_with')) {
+// 	function str_ends_with($string, $endsWith)
+// 	{
+// 		return strlen($endsWith) == 0 || substr($string, -strlen($endsWith)) === $endsWith;
+// 	}
+// }
