@@ -11,9 +11,11 @@ if (!shell_exec('which find')) {
  * @param $contains
  * @return bool
  */
-function str_contains($string, $contains)
-{
-    return strpos($string, $contains) !== false;
+if (!function_exists('str_contains')) {
+    function str_contains($string, $contains)
+    {
+        return strpos($string, $contains) !== false;
+    }
 }
 
 /**
@@ -23,9 +25,11 @@ function str_contains($string, $contains)
  * @param $startsWith
  * @return bool
  */
-function str_starts_with($string, $startsWith)
-{
-    return substr($string, 0, strlen($startsWith)) === $startsWith;
+if (!function_exists('str_starts_with')) {
+	function str_starts_with($string, $startsWith)
+	{
+		return substr($string, 0, strlen($startsWith)) === $startsWith;
+	}
 }
 
 /**
@@ -35,7 +39,9 @@ function str_starts_with($string, $startsWith)
  * @param $endsWith
  * @return bool
  */
-function str_ends_with($string, $endsWith)
-{
-    return strlen($endsWith) == 0 || substr($string, -strlen($endsWith)) === $endsWith;
+if (!function_exists('str_ends_with')) {
+	function str_ends_with($string, $endsWith)
+	{
+		return strlen($endsWith) == 0 || substr($string, -strlen($endsWith)) === $endsWith;
+	}
 }
