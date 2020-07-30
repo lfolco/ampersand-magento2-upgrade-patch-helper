@@ -6,6 +6,7 @@ env:
   - TEST_GROUP=21
   - TEST_GROUP=22
   - TEST_GROUP=23
+  - TEST_GROUP=24
 
 install:
   - composer install
@@ -15,6 +16,8 @@ install:
   - if [[ $TEST_GROUP = 22 ]]; then phpenv global 7.1; fi
   - if [[ $TEST_GROUP = 22 ]]; then ./setup-magento-with-diff.sh 2.2.0 2.2.11 $TEST_GROUP; fi
   - if [[ $TEST_GROUP = 23 ]]; then ./setup-magento-with-diff.sh 2.3.0 2.3.5 $TEST_GROUP; fi
+  - if [[ $TEST_GROUP = 24 ]]; then phpenv global 7.4; fi
+  - if [[ $TEST_GROUP = 24 ]]; then ./setup-magento-with-diff.sh 2.3.5 2.4.0 $TEST_GROUP; fi
   - cd -
 
 script:
@@ -22,9 +25,10 @@ script:
   - vendor/bin/php-cs-fixer fix --dry-run --diff dev/phpunit
   - vendor/bin/php-cs-fixer fix --dry-run --diff dev/TestModule
   - vendor/bin/phpunit -c dev/phpunit/unit/phpunit.xml --verbose;
-  - if [[ $TEST_GROUP = 21 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v22,v23 --verbose; fi
-  - if [[ $TEST_GROUP = 22 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v21,v23 --verbose; fi
-  - if [[ $TEST_GROUP = 23 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v21,v22 --verbose; fi
+  - if [[ $TEST_GROUP = 21 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v22,v23,v24 --verbose; fi
+  - if [[ $TEST_GROUP = 22 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v21,v23,v24 --verbose; fi
+  - if [[ $TEST_GROUP = 23 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v21,v22,v24 --verbose; fi
+  - if [[ $TEST_GROUP = 24 ]]; then vendor/bin/phpunit -c dev/phpunit/functional/phpunit.xml --exclude-group=v21,v22,v23 --verbose; fi
 
 addons:
   apt:
